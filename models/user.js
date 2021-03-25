@@ -1,12 +1,26 @@
 // Requiring bcrypt for password hashing. Using the bcryptjs version as the regular bcrypt module sometimes causes errors on Windows machines
 const bcrypt = require("bcryptjs");
+const sequelize = require("sequelize");
 // Creating our User model/TABLE
 
 //This model holds the login information only
 //Other models will hold the rest of the user data
+
+//shape of object -- Name STRING, Email STRING, Password STRING (ENCRYPTED), 
+//Image(filename)STRING, Mood INTERGER, Playlist ARRAY OF STRINGS
+
 module.exports = function (sequelize, DataTypes) {
   const User = sequelize.define("User", {
-
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true 
+    },
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+    },
     email: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -19,6 +33,17 @@ module.exports = function (sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: false
     },
+    image: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+    },
+    mood: DataTypes.INTEGER,
+
+    playlist: {
+      type: DataTypes.UUID,
+      primaryKey: true
+    },
 
   });
   // Creating a custom method for our User model. This will check if an unhashed password entered by the user can be compared to the hashed password stored in our database
@@ -30,6 +55,8 @@ module.exports = function (sequelize, DataTypes) {
   User.addHook("beforeCreate", function (user) {
     user.password = bcrypt.hashSync(user.password, bcrypt.genSaltSync(10), null);
   });
+
+  //User.belongsTo(Playlist);
 
   return User;
 };
