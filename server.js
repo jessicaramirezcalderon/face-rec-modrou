@@ -21,6 +21,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // Requiring our routes
+//Add all controllers files here
 app.use(require("./controllers/users.js"));
 
 // Syncing our database and logging a message to the user upon success

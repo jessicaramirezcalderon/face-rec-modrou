@@ -1,8 +1,9 @@
+const config = 
 {
   "development": {
-    "username": "root",
-    "password": "cocococo",
-    "database": "face2muzik",
+    "username": process.env.DB_USR,
+    "password": process.env.DB_PASSWORD,
+    "database": process.env.DB_NAME,
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
@@ -14,8 +15,10 @@
     "dialect": "mysql"
   },
   "production": {
-    "use_env_variable": "mysql://sckwerm5ptro5vew:cjgpx8afwk7tk0f8@vkh7buea61avxg07.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/iosp3scpnvz07os5",
+    "use_env_variable": process.env.JAWS_DB_URL,
     "dialect": "mysql"
     
   }
 }
+
+module.exports = config;

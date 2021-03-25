@@ -33,11 +33,6 @@ module.exports = function (sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: false
     },
-    image: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      unique: true,
-    },
     mood: DataTypes.INTEGER,
 
     playlist: {
