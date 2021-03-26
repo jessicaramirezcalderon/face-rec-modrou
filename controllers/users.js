@@ -1,3 +1,7 @@
+//CONTROLLER DOCUMENT HOLDING OUT ROUTES
+//ADD ANY NEW CONTROLLER DOCUMENTS TO THE SERVER JS FILE IN ROOT -- SEE COMMENT ON LINE 24 FOR REFERENCE
+
+
 const express = require("express");
 const db = require("../models");
 const router = express.Router();
@@ -30,4 +34,5 @@ router.post("/api/results/:id", function (req, res) {
 
 });
 
+//Good to export our documents to make them available globally. Probably not good practice in real life
 module.exports = router;
