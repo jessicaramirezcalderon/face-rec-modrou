@@ -28,10 +28,10 @@ router.post("/api/user", async (req, res) => {
   //We'll probably gut password and email since we're not asking the user to authenticate
   //image might not be needed either since we cannot store image file in db. 
   const userDetails = {
-    name: "User2",
-    email: "newuserr@test.com",
-    password: "tesrtpwd",
-    image: "filenarme", //we might not need this. added for now to avoid error
+    name: "EINSTEIN",
+    email: "newufgedsfgsdfserr@test.com",
+    password: "tesrasgtpwd",
+    image: "filenardfgme", //we might not need this. added for now to avoid error
     mood: 1,
     playlist: 5,
   };
@@ -39,12 +39,12 @@ router.post("/api/user", async (req, res) => {
   //MUST use Postman in order to test the POST request. 
 
   const newUser = db.User.build(userDetails);
-  console.log("THE NEW USER IS HERE", newUser);
+  console.log("THE NEW USER IS HERE", newUser.toJSON());
 
   await newUser.save().catch((err) => { console.error(err); });
 
   //this is just a basic response for testing. we'll remove later to add a real response. 
-  res.send(newUser);
+  res.send(newUser.toJSON());
 
 });
 
