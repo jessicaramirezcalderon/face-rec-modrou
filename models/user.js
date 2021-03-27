@@ -22,12 +22,10 @@ module.exports = function (sequelize, DataTypes) {
     name: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: true,
     },
     email: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: true,
       validate: {
         isEmail: true
       }
@@ -45,7 +43,6 @@ module.exports = function (sequelize, DataTypes) {
 
     playlist: {
       type: DataTypes.UUID,
-      primaryKey: true
     },
 
   });
