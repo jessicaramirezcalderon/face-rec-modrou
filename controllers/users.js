@@ -16,8 +16,12 @@ const isAuthenticated = require("../config/middleware/isAuthenticated");
 // });
 
 router.get("/", function(req, res) {
-  res.redirect("login", {});//renders HP
+  res.render("index", {});//renders HP
 });
+
+// router.get("/", function(req, res) {
+//   res.redirect("login", {});//renders HP
+// });
 
 router.get("/", function(req, res) {
   if (req.user) {
