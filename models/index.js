@@ -36,7 +36,7 @@ Object.keys(db).forEach(function(modelName) {
 
 console.log(config);
 
-//NOT SURE WHAT THIS IS
+
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 

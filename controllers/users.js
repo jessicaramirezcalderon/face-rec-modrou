@@ -1,10 +1,47 @@
-//CONTROLLER DOCUMENT HOLDING OUT ROUTES
+//CONTROLLER DOCUMENT HOLDING ROUTES SAVING AND POSTING TO DB
+//BUSINESS LOGIC DOES NOT GO HERE
 //ADD ANY NEW CONTROLLER DOCUMENTS TO THE SERVER JS FILE IN ROOT
 
 
 const express = require("express");
 const db = require("../models");
 const router = express.Router();
+const path = require("path");
+const isAuthenticated = require("../config/middleware/isAuthenticated");
+
+
+//front-end routes
+// router.get("/", function(req, res) {
+//   res.render("layouts/main", {});//renders HP
+// });
+
+router.get("/", function(req, res) {
+  res.redirect("login", {});//renders HP
+});
+
+router.get("/", function(req, res) {
+  if (req.user) {
+    res.redirect("/members");
+  }
+  res.sendFile(path.join(__dirname, "../views/layouts/signup.html"));//need to create a POST for api/signup
+});
+
+router.get("/login", function(req, res) {
+  if (req.user) {
+    res.redirect("/members");
+  }
+  res.sendFile(path.join(__dirname, "../views/layouts/login.html"));//need to create a POST for api/login
+});
+
+router.get("/members", isAuthenticated, function(req, res) {
+  res.sendFile(path.join(__dirname, "../views/layouts/members.html"));//need to create a POST for api/members
+});
+
+
+
+
+
+//DB ROUTES
 
 router.get("/api/results/:id", function (req, res) {
   //gets db data with the user's information (based on the user model inside models folder)
@@ -44,7 +81,7 @@ router.post("/api/user", async (req, res) => {
   await newUser.save().catch((err) => { console.error(err); });
 
   //this is just a basic response for testing. we'll remove later to add a real response. 
-  res.send(newUser.toJSON());
+  res.json(newUser);
 
 });
 

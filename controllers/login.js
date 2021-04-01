@@ -11,17 +11,6 @@ module.exports = function(app) {
     res.json(req.user);
   });
 
-  app.get("/api/movieApiTest/:movie", function(req, res){
-    
-    let query = `http://www.omdbapi.com/?apikey=${process.env.movieKey}&t=${req.params.movie}`;
-    console.log(query);
-
-    axios.get(query).then( results => {
-      console.log(results.data);
-      res.json(results.data);
-    });
-  });
-
   // Route for signing up a user. The user's password is automatically hashed and stored securely thanks to
   // how we configured our Sequelize User Model. If the user is created successfully, proceed to log the user in,
   // otherwise send back an error
