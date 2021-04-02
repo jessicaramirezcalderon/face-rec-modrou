@@ -32,3 +32,19 @@ body{
 .welcomeText{
     font-size:2em;
 }
+
+/*MOOD BG CHANGES*/
+
+
+
+  .happy {
+    background-color: pink;
+  }
+  
+  .sad {
+    background-color: gray;
+  }
+  
+  .neutral {
+    background-color: green;
+  }
