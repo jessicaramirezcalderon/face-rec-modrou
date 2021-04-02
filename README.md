@@ -3,19 +3,19 @@ This app uses a face recognition API in combination with the Spotify API to gene
 
 # User story
 
-*Login or Sign Up 
-*Take picture with device camera 
-*Taken to results page holding the Spotify playlist result based on the user's current mood
+- Login or Sign Up 
+- Take picture with device camera 
+- Taken to results page holding the Spotify playlist result based on the user's current mood
 
 ## Technology
 
 The website was built using HTML, CSS, Javascript, MySQL and Handlebars (as template engine), as well as several Node JS packages: 
 
-*Express
-*Express Handlebars
-*Passport 
-*Sequelize 
-*bcryptjs
+- Express
+- Express Handlebars
+- Passport 
+- Sequelize 
+- bcryptjs
 
 ## Pages
 
