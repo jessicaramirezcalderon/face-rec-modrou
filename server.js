@@ -24,8 +24,8 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 //Add all controllers files here
-app.use(require("./controllers/users.js"));
-app.use(require("./controllers/login.js"));
+app.use(require("./controllers/moodApp.js"));
+// app.use(require("./controllers/login.js"));
 
 //ORIGINAL
 // require("./routes/html-routes.js")(app);
