@@ -10,7 +10,7 @@ const router = express.Router();
 
 // //front-end routes
 // router.get("/", function(req, res) {
-//   res.render("../public/login", {});//renders HP
+//   res.render("views/public/login", {});//renders HP
 // });
 
 
