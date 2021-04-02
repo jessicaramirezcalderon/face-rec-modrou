@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spotify Web API Demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <link href="./stylesheets/spotify.css" rel="stylesheet">
+    <script src="./js/spotify.js"></script>
+</head>
+
+<body onload="onPageLoad()">
+    <div class="container">
+
+        <div id="tokenSection" class="row">
+            <div class="col">
+                <div class="mb-3">
+                    <label for="clientId" class="form-label">Client ID</label>
+                    <input type="text" class="form-control" id="clientId" placeholder="">
+                </div>
+                <div class="mb-3">
+                    <label for="clientSecret" class="form-label">Client Secret</label>
+                    <input type="text" class="form-control" id="clientSecret" placeholder="">
+                </div>
+                <input class="btn btn-primary btn-lg" type="button" onclick="requestAuthorization()" value="Request Authorization"><br/>
+            </div>
+        </div>
+
+        <div id="deviceSection" class="row">
+            <div class="col">
+
+                <div id= 'playlists'></div>
+
+                <div id= 'player'></div>
+
+                <!-- <div class="row">
+                    <div class="col">
+                        <input type="button" class="btn btn-dark" onclick="previous()" value="Prev">
+                        <input type="button" class="btn btn-dark" onclick="play()" value="Play">
+                        <input type="button" class="btn btn-dark" onclick="pause()" value="Pause">
+                        <input type="button" class="btn btn-dark" onclick="next()" value="Next">
+                    </div>
+                </div> -->
+
+                <!-- <div class="row  mt-3">
+                    <div class="col">
+                        <h1> Currently Playing</h1>
+                        <input type="button" class="btn btn-primary btn-sm mt-3" onclick="currentlyPlaying()" value="Refresh Currently Playing">
+                        <div>
+                            <img id="albumImage" src="">
+                            <div id="trackTitle"></div>
+                            <div id="trackArtist"></div>
+                        </div>
+
+                    </div>
+                </div> -->
+                
+                <!-- basic sample player -->
+                <!-- <audio controls>
+                    <source src="" type="audio/mpeg">
+                </audio> -->
+                
+
+            </div>
+        </div>
+    </div>
+
+
+</body>
+
+</html>
