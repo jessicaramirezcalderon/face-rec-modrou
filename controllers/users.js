@@ -6,43 +6,12 @@
 const express = require("express");
 const db = require("../models");
 const router = express.Router();
-const path = require("path");
-const isAuthenticated = require("../config/middleware/isAuthenticated");
 
 
-//front-end routes
+// //front-end routes
 // router.get("/", function(req, res) {
-//   res.render("layouts/main", {});//renders HP
+//   res.render("../public/login", {});//renders HP
 // });
-
-router.get("/", function(req, res) {
-  res.render("index", {});//renders HP
-});
-
-// router.get("/", function(req, res) {
-//   res.redirect("login", {});//renders HP
-// });
-
-router.get("/", function(req, res) {
-  if (req.user) {
-    res.redirect("/members");
-  }
-  res.sendFile(path.join(__dirname, "../views/layouts/signup.html"));//need to create a POST for api/signup
-});
-
-router.get("/login", function(req, res) {
-  if (req.user) {
-    res.redirect("/members");
-  }
-  res.sendFile(path.join(__dirname, "../views/layouts/login.html"));//need to create a POST for api/login
-});
-
-router.get("/members", isAuthenticated, function(req, res) {
-  res.sendFile(path.join(__dirname, "../views/layouts/members.html"));//need to create a POST for api/members
-});
-
-
-
 
 
 //DB ROUTES
