@@ -4,6 +4,7 @@ const passport = require("../config/passport");
 const axios = require("axios");
 
 module.exports = function(app) {
+  console.log(app);
   // Using the passport.authenticate middleware with our local strategy.
   // If the user has valid login credentials, send them to the members page.
   // Otherwise the user will be sent an error
