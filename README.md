@@ -21,12 +21,15 @@ The website was built using HTML, CSS, Javascript, MySQL and Handlebars (as temp
 
 Several responsive pages:
 
+![Face to Muzik](DEMO.png)
+
 The start page takes user's information
 Face Recognition interface that takes the user's picture
 Results page holding the resulting Spotify playlist
 
 ## Heroku Deployed Link 
-![Face to Muzik](https://enigmatic-garden-97226.herokuapp.com/)
+
+https://enigmatic-garden-97226.herokuapp.com/ 
 
 ## Contributing
 
