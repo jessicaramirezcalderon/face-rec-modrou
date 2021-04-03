@@ -1,4 +1,4 @@
-# Face To Muzik
+# FaceThaMuzik
 This app uses a face recognition API in combination with the Spotify API to generate a playlist based on the user's mood. 
 
 # User story
