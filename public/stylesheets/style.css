@@ -18,6 +18,10 @@ header h1 {
   padding: 15px 0;
 }
 
+h2, p, label {
+  color: white;
+}
+
 .form-container {
   width: 100%;
   margin: 0 auto;
