@@ -15,10 +15,8 @@ const config =
     "dialect": "mysql"
   },
   "production": {
-    // "use_env_variable": process.env.JAWS_DB_URL,
-    "use_env_variable": DATABASE_URL,
+    "use_env_variable": process.env.JAWS_DB_URL,
     "dialect": "mysql"
-    
   }
 }
 
