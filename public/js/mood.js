@@ -123,38 +123,40 @@ video.addEventListener('play', () => {
 //This should be assigned to the results page
 
 
-const bdChanges = () => {
+// const bdChanges = () => {
 
-    const bgContainer = document.getElementById("bg");
+//     const bgContainer = document.getElementById("bg");
 
-    const happyClass = 'happy';
-    const sadClass = 'sad';
-    const neutralClass = 'neutral';
+//     const happyClass = 'happy';
+//     const sadClass = 'sad';
+//     const neutralClass = 'neutral';
 
-    const happyMood = 1;
-    const sadMood = 2;
-    const neutralMood = 3;
+//     const happyMood = 1;
+//     const sadMood = 2;
+//     const neutralMood = 3;
 
-    let mood = happyMood; //mood must be assigned from the facial api functionality above
+//     let mood = happyMood; //mood must be assigned from the facial api functionality above
 
-    if (mood === happyMood) {
-        bgContainer.className = happyClass;
-    }
-    else if (mood === sadMood) {
-        bgContainer.className = sadClass;
-    }
-    else if (mood === neutralMood) {
-        bgContainer.className = neutralClass;
-    }
-};
-
-bdChanges();
+//     if (mood === happyMood) {
+//         bgContainer.className = happyClass;
+//     }
+//     else if (mood === sadMood) {
+//         bgContainer.className = sadClass;
+//     }
+//     else if (mood === neutralMood) {
+//         bgContainer.className = neutralClass;
+//     }
+// };
+// bdChanges();
 
 
 
 // Retake and Continue Buttons
-
 $("#retake").on("click", function () {
     console.log("redo face scan!");
     location.reload();
+});
+
+$("#continue").on("click", function () {
+    console.log("facethamuzik!");
 });
