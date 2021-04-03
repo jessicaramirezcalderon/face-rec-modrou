@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=PT+Serif:wght@400;700&display=swap');
-
 body {
+  background-image: url('https://wallpapercave.com/wp/AQx74JL.jpg');
   width: 70%;
   margin: 0 auto;
   font-family: 'PT Serif', serif;
@@ -18,14 +18,11 @@ header h1 {
   padding: 15px 0;
 }
 
-
 .form-container {
   width: 100%;
   margin: 0 auto;
 }
 
-form.signup,
-form.login {
+form.signup, form.login {
   margin-top: 50px;
 }
-
