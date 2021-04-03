@@ -25,9 +25,8 @@ The start page takes user's information
 Face Recognition interface that takes the user's picture
 Results page holding the resulting Spotify playlist
 
-URL: 
-
-![Face to Muzik](FILENAME                                     )
+## Heroku Deployed Link 
+![Face to Muzik](https://enigmatic-garden-97226.herokuapp.com/)
 
 ## Contributing
 
