@@ -100,16 +100,19 @@ video.addEventListener('play', () => {
             // save to local storage
             // localStorage.setItem("mood", musicMood);
 
-            $.post("/api/mood", {
-                userId: localStorage.getItem("userId"),
-                mood: musicMood
-            })
-                .then(function (data) {
-                    console.log(data);
-                })
-                .catch(function (err) {
-                    console.log(err);
-                });
+            window.location.href = `/results?mood=${musicMood}`;
+            
+            // $.post("/api/mood", {
+            //     userId: localStorage.getItem("userId"),
+            //     mood: musicMood
+            // })
+            //     .then(function (data) {
+            //         console.log(data);
+            //         window.location.href = `/results?mood=${musicMood}`;//added the spotify call to pass the winning mood 
+            //     })
+            //     .catch(function (err) {
+            //         console.log(err);
+            //     });
 
             const resizedDetections = faceapi.resizeResults(detections, displaySize)
             canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height)
@@ -150,4 +153,4 @@ const bdChanges = () => {
     }
 };
 
-bdChanges();
+//bdChanges();

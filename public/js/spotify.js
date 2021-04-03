@@ -1,10 +1,12 @@
 // Start @177
 
 // var redirect_uri = "https://makeratplay.github.io/SpotifyWebAPI/"; // change this your value
-var redirect_uri = "http://127.0.0.1:5500/SpotifyWebAPI/index.html";
 
-var client_id = "ace5f2d6e3af4a78af05061f9a27201c";
-var client_secret = "e8b317a8d6c542539b218d2795b70aea"; // In a real app you should not expose your client_secret to the user
+// malcolm var client_id = "ace5f2d6e3af4a78af05061f9a27201c";
+//malcolm var client_secret = "e8b317a8d6c542539b218d2795b70aea"; // In a real app you should not expose your client_secret to the user
+
+let client_id = "4063b2447c1b4aeda330247daa2fbd5e";
+let client_secret = "0e780be79e5b46089f31013a32c1f063";
 
 var access_token = null;
 var refresh_token = null;
@@ -14,6 +16,7 @@ var radioButtons = [];
 const AUTHORIZE = "https://accounts.spotify.com/authorize"
 const TOKEN = "https://accounts.spotify.com/api/token";
 const PLAYLISTS = "https://api.spotify.com/v1/me/playlists";
+const SEARCH = "https://api.spotify.com/v1/search";
 const DEVICES = "https://api.spotify.com/v1/me/player/devices";
 const PLAY = "https://api.spotify.com/v1/me/player/play";
 const PAUSE = "https://api.spotify.com/v1/me/player/pause";
@@ -24,33 +27,44 @@ const TRACKS = "https://api.spotify.com/v1/playlists/{{PlaylistId}}/tracks";
 const CURRENTLYPLAYING = "https://api.spotify.com/v1/me/player/currently-playing";
 const SHUFFLE = "https://api.spotify.com/v1/me/player/shuffle";
 
+const searchParams = (new URL(location.href)).searchParams;
+const mood = searchParams.get('mood');
+const apiCode = searchParams.get('code');
+const redirect_uri = location.href.split('&code=')[0].split('code=')[0];
+
+let accessTokenRetrieved = false;
+
 function onPageLoad() {
+    if (!apiCode) {
+        return requestAuthorization();
+    }
+    
+    if (!accessTokenRetrieved) {
+        return handleRedirect();
+    }
+
     client_id = localStorage.getItem("client_id");
     client_secret = localStorage.getItem("client_secret");
-    if (window.location.search.length > 0) {
-        handleRedirect();
+    
+    access_token = localStorage.getItem("access_token");
+    if (access_token == null) {
+        // we don't have an access token so present token section
+        document.getElementById("tokenSection").style.display = 'block';
     }
     else {
-        access_token = localStorage.getItem("access_token");
-        if (access_token == null) {
-            // we don't have an access token so present token section
-            document.getElementById("tokenSection").style.display = 'block';
-        }
-        else {
-            // we have an access token so present device section
-            document.getElementById("deviceSection").style.display = 'block';
-            refreshDevices();
-            refreshPlaylists();
-            currentlyPlaying();
-        }
+        // we have an access token so present device section
+        document.getElementById("deviceSection").style.display = 'block';
+        refreshDevices();
+        refreshPlaylists();
+        //currentlyPlaying();
     }
     refreshRadioButtons();
 }
 
 function handleRedirect() {
     let code = getCode();
-    fetchAccessToken(code);
     window.history.pushState("", "", redirect_uri); // remove param from url
+    fetchAccessToken(code);
 }
 
 function getCode() {
@@ -64,8 +78,8 @@ function getCode() {
 }
 
 function requestAuthorization() {
-    client_id = document.getElementById("clientId").value;
-    client_secret = document.getElementById("clientSecret").value;
+    client_id = document.getElementById("clientId").value || client_id;
+    client_secret = document.getElementById("clientSecret").value || client_secret;
     localStorage.setItem("client_id", client_id);
     localStorage.setItem("client_secret", client_secret); // In a real app you should not expose your client_secret to the user
 
@@ -106,6 +120,7 @@ function callAuthorizationApi(body) {
 
 function handleAuthorizationResponse() {
     if (this.status == 200) {
+        accessTokenRetrieved = true;
         var data = JSON.parse(this.responseText);
         console.log(data);
         var data = JSON.parse(this.responseText);
@@ -162,18 +177,18 @@ function callApi(method, url, body, callback) {
 }
 
 function refreshPlaylists() {
-    callApi("GET", PLAYLISTS, null, handlePlaylistsResponse);
+    const endpoint = `${SEARCH}?q=${mood}&type=playlist`;
+    callApi("GET", endpoint, null, handlePlaylistsResponse);
 }
 
 function playTraxResponse() {
     console.log(JSON.parse(this.responseText));
     window.testTracks = JSON.parse(this.responseText);
-    let trackList = testTracks.items.map(data => data.track)
+    let trackList = testTracks.items.map(data => data.track).filter((track) => track.preview_url);
+
     for (var i = 0; i < trackList.length; i++) {
         setTimeout(function (url) {
-            // console.log(url);
             if (url !== null) {
-                let playerElem = document.getElementById('player');
                 let player = `<audio controls autoplay>
                 <source src="${url}" type="audio/mpeg">
                 </audio>`; 
@@ -187,24 +202,16 @@ function playTraxResponse() {
 function handlePlaylistsResponse() {
     if (this.status == 200) {
         var data = JSON.parse(this.responseText);
-        // console.log(data);
-        // removeAllItems("playlists");
 
-        let mood = 'random';
-
-        const currentPlayList = data.items.map((item) => item.name);
-        console.log(currentPlayList);
-
-        const moodPlaylist = data.items.filter((item) => item.name === mood);
+        const moodPlaylist = data.playlists.items.shift();
         console.log(moodPlaylist);
 
         // addPlaylist(moodPlaylist);
 
-        document.getElementById('playlists').textContent = moodPlaylist[0].name;
-        console.log(moodPlaylist[0].name);
+        document.getElementById('playlists').textContent = moodPlaylist.name;
+        console.log(moodPlaylist.name);
 
-        callApi("GET", TRACKS.replace('{{PlaylistId}}', moodPlaylist[0].id), null, playTraxResponse);
-
+        callApi("GET", TRACKS.replace('{{PlaylistId}}', moodPlaylist.id), null, playTraxResponse);
     }
     else if (this.status == 401) {
         refreshAccessToken()
