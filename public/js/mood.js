@@ -154,3 +154,13 @@ const bdChanges = () => {
 };
 
 //bdChanges();
+
+// Retake and Continue Buttons
+$("#retake").on("click", function () {
+    console.log("redo face scan!");
+    location.reload();
+});
+
+$("#continue").on("click", function () {
+    console.log("onto the music page!");
+});

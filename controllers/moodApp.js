@@ -30,6 +30,10 @@ router.get("/results", function (req, res) {
   res.sendFile(path.join(__dirname, "../public/results.html"));
 });
 
+router.get("/logout", function (req, res) {
+  res.sendFile(path.join(__dirname, "../public/login.html"));
+});
+
 //DB ROUTES
 router.get("/api/results/:id", function (req, res) {
   //gets db data with the user's information (based on the user model inside models folder)
